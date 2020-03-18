@@ -1,1 +1,20 @@
-<app-shoppinglist></app-shoppinglist>
+<div class="loginDiv" *ngIf="( auth.user | async) as obs; else login">{{obs.email}} - {{obs.uid}}
+  <br/><br/>
+  <button class="btn btn-secondary" (click)="auth.logout()">OUT</button>
+  <br/><br/>
+</div>
+<ng-template #login>
+  <div class="loginDiv">
+    <br/><br/>
+    <button class="btn btn-primary" (click)="auth.login()">
+      <i class="far fa-envelope"></i>
+      Email Login
+    </button>
+    <br/><br/>
+    <button class="btn btn-danger" (click)="auth.glogin()">
+      <i class="fab fa-google"></i>
+      Google Login
+    </button>
+  </div>
+
+</ng-template>
