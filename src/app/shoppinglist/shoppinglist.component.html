@@ -1,0 +1,29 @@
+<h1>LISTA DE LA COMPRA</h1>
+<div class="grid-container">
+  <div class="grid-item">
+    <p *ngFor="let producto of productos index as i;">
+      <button (click)="producto.comprado = true" mdbBtn type="button" name="comprado-{{i}}" class="button button1"
+              *ngIf="!producto.comprado">{{producto.nombre}}</button>
+    </p>
+  </div>
+  <div class="grid-item">
+    <p *ngFor="let producto of productos index as i;">
+      <button (click)="producto.comprado = false" mdbBtn type="button" name="comprado-{{i}}" class="button button2"
+              *ngIf="producto.comprado">{{producto.nombre}}</button>
+    </p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

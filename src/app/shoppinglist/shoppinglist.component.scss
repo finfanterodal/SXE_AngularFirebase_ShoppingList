@@ -1,0 +1,49 @@
+table, th, td {
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 300px 300px;
+  padding: 10px;
+}
+
+.grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: #4CAF50;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button2 {
+  background-color: #4CAF50;
+}
+
+/* Blue */
+.button1 {
+  background-color: #f44336;
+}
+
+/* Red */
