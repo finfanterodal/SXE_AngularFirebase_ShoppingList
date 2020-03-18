@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {map} from 'rxjs/operators';
 import {auth} from 'firebase';
-import {error} from 'util';
+import {FireDBService} from './fire-db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,8 @@ export class ServicioDeAutentService {
     this.authApp.auth.signInWithEmailAndPassword(this.email, this.pass)
       .then(user => {
         console.log('user: ', user);
+        this.email = '';
+        this.pass = '';
       })
       .catch(error2 => {
         console.log('error en email login: ', error2);
@@ -52,4 +54,5 @@ export class ServicioDeAutentService {
     console.log('logout!');
     this.authApp.auth.signOut();
   }
+
 }

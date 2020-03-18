@@ -1,7 +1,9 @@
 <div class="loginDiv" *ngIf="( auth.user | async) as obs; else login">{{obs.email}} - {{obs.uid}}
-  <app-shoppinglist></app-shoppinglist>
-  <br/><br/>
   <button class="btn btn-secondary" (click)="auth.logout()">OUT</button>
+  <br/><br/>
+  <button class="btn btn-success" (click)="dbApp.altausuario(obs.email, obs.uid)"><i class="fas fa-check"></i> ALTA
+  </button>
+  <button class="btn btn-danger" (click)="dbApp.bajausuario(obs.uid)"><i class="far fa-trash-alt"></i> BAJA</button>
   <br/><br/>
 </div>
 

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ServicioDeAutentService} from './servicio-de-autent.service';
+import {FireDBService} from './fire-db.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent {
   title = 'SXEAngularShoppingList';
 
   /*Necesario para referenciar el servicio desde la plantilla de html*/
-  constructor(public auth: ServicioDeAutentService) {
+  constructor(public auth: ServicioDeAutentService,
+              public dbApp: FireDBService) {
   }
 }
