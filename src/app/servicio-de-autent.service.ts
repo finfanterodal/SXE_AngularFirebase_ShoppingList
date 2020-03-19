@@ -11,9 +11,12 @@ export class ServicioDeAutentService {
 
   email = '';
   pass = '';
+  emailAuth = false;
+  googleAuth = false;
   authUser = null;
 
-  constructor(public authApp: AngularFireAuth) {
+  constructor(public authApp: AngularFireAuth,
+              public dbApp: FireDBService) {
   }
 
   /*Observable para ver el estado de la sesión del usuario*/
@@ -28,6 +31,7 @@ export class ServicioDeAutentService {
 
   login() {
     console.log('email login!');
+    this.emailAuth = true;
     this.authApp.auth.signInWithEmailAndPassword(this.email, this.pass)
       .then(user => {
         console.log('user: ', user);
@@ -41,6 +45,7 @@ export class ServicioDeAutentService {
 
   glogin() {
     console.log('gogle login!');
+    this.googleAuth = true;
     this.authApp.auth.signInWithPopup(new auth.GoogleAuthProvider())
       .then(user => {
         console.log('user: ', user);
@@ -52,6 +57,8 @@ export class ServicioDeAutentService {
 
   logout() {
     console.log('logout!');
+    this.googleAuth = false;
+    this.emailAuth = false;
     this.authApp.auth.signOut();
   }
 

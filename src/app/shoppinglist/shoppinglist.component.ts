@@ -1,5 +1,6 @@
-
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {FireDBService} from '../fire-db.service';
 
 @Component({
   selector: 'app-shoppinglist',
@@ -10,39 +11,41 @@ export class ListComponent implements OnInit {
 
   productos: any[];
 
-  constructor() {
+  constructor(public authApp: AngularFireAuth,
+              public dbApp: FireDBService) {
+    dbApp.añadirProducto('Aceitunas', 'Aceitunas');
+    dbApp.añadirProducto('Cacahuetes', 'Cacahuetes');
+    dbApp.añadirProducto('Patatillas', 'Patatillas');
+    dbApp.añadirProducto('Pistachos', 'Pistachos');
+    dbApp.añadirProducto('Almendras', 'Almendras');
+    dbApp.añadirProducto('Pipas', 'Pipas');
+
     const producto1 = {
       nombre: 'Aceitunas',
-      descripcion: 'Verde y redonda.',
       comprado: false
     };
     const producto2 = {
       nombre: 'Cacahuetes',
-      descripcion: 'Manises redondos.',
       comprado: false
     };
 
     const producto3 = {
       nombre: 'Patatillas',
-      descripcion: 'Patatas fritas con forma ondulada.',
       comprado: false
     };
 
     const producto4 = {
       nombre: 'Pistachos',
-      descripcion: 'Fruto seco.',
       comprado: false
     };
 
     const producto5 = {
       nombre: 'Almendras',
-      descripcion: 'Fruto seco del almendro.',
       comprado: false
     };
 
     const producto6 = {
       nombre: 'Pipas',
-      descripcion: 'Semillas de girasol saladas.',
       comprado: false
     };
     this.productos = [];
