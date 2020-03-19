@@ -1,22 +1,47 @@
-<!--<h1>LISTA DE LA COMPRA</h1>
-<div class="grid-container">
-  <div class="grid-item">
-    <p *ngFor="let producto of productos index as i;">
-      <button (click)="producto.comprado = true" mdbBtn type="button" name="comprado-{{i}}" class="button button1"
-              *ngIf="!producto.comprado">{{producto.nombre}}</button>
-    </p>
-  </div>
-  <div class="grid-item">
-    <p *ngFor="let producto of productos index as i;">
-      <button (click)="producto.comprado = false" mdbBtn type="button" name="comprado-{{i}}" class="button button2"
-              *ngIf="producto.comprado">{{producto.nombre}}</button>
-    </p>
-  </div>
-</div>
--->
+<ng-container *ngIf="( authApp.user | async) as obs">
+  <ng-container *ngIf="dbApp.listaAux == false else init">
+    <h1>LISTA DE LA COMPRA</h1>
+    <div class="grid-container">
+      <div class="grid-item">
+        <p *ngFor="let producto of dbApp.lista index as i;">
+          <button (click)="onClickComprar(i, obs.uid)" mdbBtn type="button"
+                  name="comprado-{{i}}" class="button button1"
+                  *ngIf="!producto.comprado">{{producto.nombre}}</button>
+        </p>
+      </div>
+      <div class="grid-item">
+        <p *ngFor="let producto of dbApp.lista index as i;">
+          <button (click)="onClickComprado(i, obs.uid)" mdbBtn type="button"
+                  name="comprado-{{i}}" class="button button2"
+                  *ngIf="producto.comprado">{{producto.nombre}}</button>
+        </p>
+      </div>
+    </div>
 
+  </ng-container>
 
+  <ng-template #init>
+    <h1>LISTA DE LA COMPRA2</h1>
+    <div class="grid-container">
+      <div class="grid-item">
+        <p *ngFor="let producto of productos index as i;">
+          <button (click)="onClickComprar2(i, obs.uid)" mdbBtn type="button"
+                  name="comprado-{{i}}" class="button button1"
+                  *ngIf="!producto.comprado">{{producto.nombre}}</button>
+        </p>
+      </div>
+      <div class="grid-item">
+        <p *ngFor="let producto of productos index as i;">
+          <button (click)="onClickComprado2(i, obs.uid)" mdbBtn type="button"
+                  name="comprado-{{i}}" class="button button2"
+                  *ngIf="producto.comprado">{{producto.nombre}}</button>
+        </p>
+      </div>
+    </div>
 
+  </ng-template>
+
+</ng-container>
 
 
 

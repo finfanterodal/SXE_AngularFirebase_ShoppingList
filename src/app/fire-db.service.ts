@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from '@angular/fire/database';
-import {isBoolean} from 'util';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireDBService {
   altaUser = false;
-  lista = [];
+  lista: any[6];
   listaAux = false;
 
   constructor(private db: AngularFireDatabase) {
@@ -21,6 +21,7 @@ export class FireDBService {
   altausuario(usuarioNuevoCorreo: string, usuarioNuevoUID: string) {
     this.db.object('users/userUID/' + usuarioNuevoUID.toString()).update({correo: usuarioNuevoCorreo});
     this.altaUser = true;
+    this.getListaProductos(usuarioNuevoUID.toString());
     console.log('Insertado uid');
   }
 
@@ -66,9 +67,9 @@ export class FireDBService {
    * @param uid uid usuario logeado
    * @param listaProductos array de productos del usuario en concreto
    */
-  getProductos(uid: string) {
+  getListaProductos(uid: string) {
     this.listaAux = true;
-    this.db.list('users/userUID/' + uid + '/Lista_productos/').snapshotChanges().subscribe(result => {
+    this.db.list('users/userUID/' + uid + '/Lista/').snapshotChanges().subscribe(result => {
       this.lista = [];
       result.forEach(l => {
         this.listaAux = false;
@@ -81,4 +82,12 @@ export class FireDBService {
     });
     return this.lista;
   }
+
+  /**
+   * Selecciona los productos de la base de datos
+   */
+  getProductos() {
+    return this.db.list('productos').snapshotChanges();
+  }
+
 }

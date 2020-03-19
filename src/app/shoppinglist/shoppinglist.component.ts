@@ -10,17 +10,9 @@ import {FireDBService} from '../fire-db.service';
 export class ListComponent implements OnInit {
 
   productos: any[6];
-  listaUsers: any[];
 
   constructor(public authApp: AngularFireAuth,
               public dbApp: FireDBService) {
-    dbApp.añadirProducto('Aceitunas', 'Aceitunas');
-    dbApp.añadirProducto('Cacahuetes', 'Cacahuetes');
-    dbApp.añadirProducto('Patatillas', 'Patatillas');
-    dbApp.añadirProducto('Pistachos', 'Pistachos');
-    dbApp.añadirProducto('Almendras', 'Almendras');
-    dbApp.añadirProducto('Pipas', 'Pipas');
-
     const producto1 = {
       nombre: 'Aceitunas',
       comprado: false
@@ -58,32 +50,48 @@ export class ListComponent implements OnInit {
     this.productos.push(producto6);
   }
 
-  onClickComprar(int, uid: string) {
-    this.productos[int].comprado = false;
-    this.dbApp.listaUsuario(uid, this.productos);
+  ngOnInit() {
   }
 
+  /**
+   * Cuando el usuario pulsa un producto este se cambia de estado y se guarda en la lista de la base de datos.
+   * @param int numero de producto seleccionado
+   * @param uid uid del usuario logeado
+   */
+  onClickComprar(int, uid: string) {
+    this.dbApp.lista[int].comprado = true;
+    this.dbApp.listaUsuario(uid, this.dbApp.lista);
+  }
+
+  /**
+   * Cuando el usuario pulsa un producto este se cambia de estado y se guarda en la lista de la base de datos.
+   * @param int numero de producto seleccionado
+   * @param uid uid del usuario logeado
+   */
   onClickComprado(int, uid: string) {
+    this.dbApp.lista[int].comprado = false;
+    this.dbApp.listaUsuario(uid, this.dbApp.lista);
+  }
+
+  /**
+   * Cuando el usuario pulsa un producto este se cambia de estado y se guarda en la lista de la base de datos,
+   * * en este caso la lista que se utiliza de base es la local, porque el usuario se supono que no estaba registrado y no había datos.
+   * @param int numero de producto seleccionado
+   * @param uid uid del usuario logeado
+   */
+  onClickComprar2(int, uid: string) {
     this.productos[int].comprado = true;
     this.dbApp.listaUsuario(uid, this.productos);
   }
 
-
-  ngOnInit() {
-    this.dbApp.getDatosUsers().subscribe(result => {
-      this.listaUsers = [];
-      result.forEach(u => {
-        const user: any = u.payload.val();
-        user.key = u.key;
-        console.log(user.key);
-        this.listaUsers.push(user);
-        console.log(u);
-
-        console.log(this.listaUsers);
-      });
-    });
-
+  /**
+   * Cuando el usuario pulsa un producto este se cambia de estado y se guarda en la lista de la base de datos,
+   * en este caso la lista que se utiliza de base es la local, porque el usuario se supono que no estaba registrado y no había datos.
+   * @param int numero de producto seleccionado
+   * @param uid uid del usuario logeado
+   */
+  onClickComprado2(int, uid: string) {
+    this.productos[int].comprado = false;
+    this.dbApp.listaUsuario(uid, this.productos);
   }
-
-
 }
