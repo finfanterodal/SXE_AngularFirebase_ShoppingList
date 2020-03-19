@@ -13,6 +13,14 @@ export class ListComponent implements OnInit {
 
   constructor(public authApp: AngularFireAuth,
               public dbApp: FireDBService) {
+    /*Añadimos productos a la vase de datos*/
+    dbApp.añadirProducto('Aceitunas', 'Aceitunas');
+    dbApp.añadirProducto('Cacahuetes', 'Cacahuetes');
+    dbApp.añadirProducto('Patatillas', 'Patatillas');
+    dbApp.añadirProducto('Pistachos', 'Pistachos');
+    dbApp.añadirProducto('Almendras', 'Almendras');
+    dbApp.añadirProducto('Pipas', 'Pipas');
+
     const producto1 = {
       nombre: 'Aceitunas',
       comprado: false
